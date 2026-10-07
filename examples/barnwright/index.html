@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1920, height=1080" />
+<title>Barnwright Software — illustrative sample</title>
+<script src="assets/gsap.min.js"></script>
+<style>
+html, body { margin: 0; width: 100%; height: 100%; background: #101f1b; color: #f7f2df; font-family: sans-serif; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.backdrop { position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 40%, #294d40, #101f1b 70%); }
+.clip { position: absolute; inset: 0; }
+.copy { position: absolute; left: 140px; top: 340px; width: 950px; }
+h1, h2 { margin: 0 0 32px; font-size: 112px; line-height: 1.05; letter-spacing: -4px; }
+p { font-size: 34px; line-height: 1.4; margin: 0; color: #d7dfd6; }
+.eyebrow { position: absolute; top: 100px; left: 140px; font-size: 24px; letter-spacing: 6px; color: #e8bf72; }
+.shed { position: absolute; right: 110px; top: 285px; width: 610px; height: 480px; }
+.url { font-size: 46px; color: #e8bf72; }
+.note { position: absolute; bottom: 90px; left: 140px; font-size: 22px; color: #bac6bf; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="barnwright" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+<div class="backdrop"></div>
+<div class="eyebrow">BARNWRIGHT SOFTWARE</div>
+<section class="clip" id="intro" data-start="0" data-duration="5" data-track-index="1"><div class="copy" id="intro-copy"><h1>Barnwright<br />Software</h1><p>3D shed design</p></div></section>
+<section class="clip" id="design" data-start="5" data-duration="5" data-track-index="1"><div class="copy" id="design-copy"><h2>Explore your<br />next building</h2><p>3D shed design</p></div></section>
+<section class="clip" id="outro" data-start="10" data-duration="5" data-track-index="1"><div class="copy" id="outro-copy"><h2>3D shed design</h2><p class="url">demo.barnwrightsoftware.com</p></div></section>
+<section id="shed-scene" class="clip" data-start="0" data-duration="15" data-track-index="2"><svg id="shed" class="shed" viewBox="0 0 610 480" aria-label="Illustrative shed, not a product screenshot"><g id="shed-lines" fill="none" stroke="#e8bf72" stroke-width="5" stroke-linejoin="round"><path d="M65 210 265 65 555 165 350 310Z" fill="#284c3e"/><path d="M65 210V390L350 455V310M350 455 555 355V165"/><path d="M118 222V340L227 367V255ZM389 317V414L463 378V280Z"/><path d="M85 199 283 87M108 215 306 95M133 234 332 104M161 245 357 113M190 256 385 123M219 267 411 132M248 278 437 142M278 289 464 150M308 300 491 160" opacity=".35"/></g></svg></section>
+<div class="note">Illustrative motion sample · no audio</div>
+</div>
+<script>
+const tl = gsap.timeline({ paused: true });
+for (const [selector, start] of [["#intro-copy", 0], ["#design-copy", 5], ["#outro-copy", 10]]) {
+  tl.fromTo(selector, { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, start + 0.15);
+  if (start < 10) tl.to(selector, { opacity: 0, y: -16, duration: 0.4 }, start + 4.5);
+}
+tl.fromTo("#shed", { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 1.2, ease: "power2.out" }, 0.2);
+tl.fromTo("#shed-lines path", { strokeDasharray: 2000, strokeDashoffset: 2000 }, { strokeDashoffset: 0, duration: 4, stagger: 0.65, ease: "power1.inOut" }, 0.3);
+
+window.__timelines = window.__timelines || {};
+window.__timelines.barnwright = tl;
+</script>
+</body>
+</html>

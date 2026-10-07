@@ -1,0 +1,16 @@
+{
+  "name": "barnwright-video-sample",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "prepare-assets": "node prepare-assets.cjs",
+    "lint": "hyperframes lint && hyperframes lint typography",
+    "check": "hyperframes check && hyperframes check typography",
+    "preview": "hyperframes preview",
+    "render": "hyperframes render --fps 30 --quality looks --workers 2 --strict --output \"$PWD/renders/barnwright-shed.mp4\" && hyperframes render typography --fps 30 --quality looks --workers 2 --strict --output \"$PWD/renders/barnwright-typography.mp4\""
+  },
+  "dependencies": {
+    "gsap": "3.13.0",
+    "hyperframes": "0.8.140"
+  }
+}

@@ -1,0 +1,11 @@
+const fs = require("node:fs");
+const assert = require("node:assert/strict");
+const probe = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+const video = probe.streams.find((stream) => stream.codec_type === "video");
+assert.ok(video, "Expected a video stream");
+assert.equal(video.width, 1920);
+assert.equal(video.height, 1080);
+assert.equal(video.avg_frame_rate, "30/1");
+assert.ok(Math.abs(Number(probe.format.duration) - 15) < 0.1, "Expected 15-second duration");
+assert.ok(!probe.streams.some((stream) => stream.codec_type === "audio"), "Sample should be silent");
+console.log("Verified: 15 seconds, 1920×1080, 30 fps, silent.");
